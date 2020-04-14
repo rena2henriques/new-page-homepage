@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>New tab</title>
+        <link src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <link src="https://moment.github.io/luxon/global/luxon.min.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link href="/path/to/bootstrap.min.css" rel="stylesheet">
+        <link href="dist/css/component-custom-switch.css" rel="stylesheet">
+        <style>
+
+            body {
+                background-image: url(vietnam.jpg);
+                background-color: #cccccc;
+                background-size: cover;
+                font-family: 'Roboto';
+            }
+
+            a { 
+                text-decoration: none;
+                color:white;
+            }
+
+            .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            }
+
+            .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+            }
+
+            .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            }
+
+            .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            }
+
+            input:checked + .slider {
+            background-color: #2196F3;
+            }
+
+            input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+            border-radius: 34px;
+            }
+
+            .slider.round:before {
+            border-radius: 50%;
+            }
+
+            /* Boxes */
+
+            .container .box {
+                height: 400px;  
+                width:760px;  
+                margin:60px;  
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+            }  
+            .container .box .box-row {  
+                display:table-row;
+            }  
+            
+            .container .box .box-cell {  
+                display:table-cell;  
+                width:25%;  
+                padding:40px;
+                border: 1px solid black;
+                background: rgb(138, 138, 141, 0.4);
+            }  
+            .container .box .box-cell.box1 {
+                text-align:justify;  
+            }  
+            .container .box .box-cell.box2 {                  
+                text-align:justify  
+            }  
+            .container .box .box-cell.box3 {
+                text-align:justify;  
+            }
+            .container .box .box-cell.box4 {
+                    
+                text-align:justify;  
+            } 
+
+            /* Header */
+
+            .header { 
+                padding: 5px;
+                color: black;
+                font-size: 16pt;
+            }
+
+            .header .textleft{ 
+                float: left;
+            }
+
+            .header .textright{ 
+                float: right;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <div id="app">
+            <center>
+
+                <div class="header">
+                    <span class="textleft">{{time}}</span>
+                    <div class="textright">
+                        <span>Distraction free mode
+                        <label class="switch">
+                            <input type="checkbox" id='Distraction' v-model="toggle">
+                            <span class="slider round"></span>
+                        </label>
+                        </span>
+                        
+                    </div>
+                    <!-- <p>TODO: MAYBE GET A GOOD QUOTE</p> -->
+                </div>
+                
+                <div class="container">
+                    <div class="box">  
+                        <div class="box-row">
+                            <div v-if="!toggle" class="box-cell box1">
+                                <h2><center>Social</center></h2>
+                                <ul>
+                                    <li><a href="https://www.facebook.com">Facebook</a></li>
+                                    <li><a href="https://www.goodreads.com">Goodreads</a></li>
+                                    <li><a href="https://www.linkedin.com">LinkedIn</a></li>
+                                    <li><a href="https://www.messenger.com">Messenger</a></li>
+                                    <li><a href="https://web.whatsapp.com">Whatsapp</a></li>
+                                    <li><a href="https://www.reddit.com">Reddit</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="box-cell box2">
+                                <center>
+                                <h2>Work</h2>
+                                </center>
+                                <ul>
+                                    <li><a href="https://mail.google.com">Gmail</a></li>
+                                    <li><a href="https://fenix.tecnico.ulisboa.pt/">Fenix IST</a></li>
+                                    <li><a href="https://github.com">Github</a></li>
+                                    <li><a href="https://leetcode.com">Leetcode</a></li>
+                                </ul>
+                                
+                            </div>
+
+                            <div class="box-cell box3">
+                                <h2><center>Media</center></h2>
+                                <ul>
+                                    <li v-if="!toggle"><a href="https://youtube.com">Youtube</a></li>
+                                    <li><a href="https://open.spotify.com">Spotify</a></li>
+                                    <li v-if="!toggle"><a href="https://imdb.com/">Imdb</a></li>
+                                    <li v-if="!toggle"><a href="www.reddit.com/r/manga">Manga</a></li>
+                                    <li v-if="!toggle"><a href="https://mrpiracy.site/">Mr.Piracy</a></li>
+                                </ul>
+                            </div>
+
+                            <div v-if="!toggle" class="box-cell box3">
+                                <h2><center>Finances</center></h2>
+                                <ul>
+                                    <li><a href="https://finance.yahoo.com">Yahoo Finance</a></li>
+                                    <li><a href="https://degiro.pt">Degiro</a></li>
+                                    <li><a href="https://www.cgd.pt">CGD</a></li>
+                                    <li><a href="https://www.investopedia.com">Investopedia</a></li>
+                                </ul>
+                            </div>
+                        </div>  
+                    </div>  
+                </div>
+
+                <!--<h3>{{time}}</h3>-->
+
+                
+
+            </center>
+
+        </div>
+
+        <script>
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    toggle: false,
+                    time: luxon.DateTime.local().toFormat('HH:mm')
+                },
+                created() {
+                    interval = setInterval(() => this.time = luxon.DateTime.local().toFormat('HH:mm'), 1000);
+                }
+            })
+    
+        </script>
+    </body>
+
+</html> 
